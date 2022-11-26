@@ -6,7 +6,7 @@
 
 #include "pico/binary_info.h"
 #include "hardware/i2c.h"
-
+#include "ui/ui.h"
 
 #define ADDR 0x3C
 
@@ -159,6 +159,7 @@ void my_set_px_cb(lv_disp_drv_t* disp_drv, uint8_t* buf, lv_coord_t buf_w, lv_co
 
 void do_tick_inc() {
     lv_tick_inc(5);
+    ui_tick();
 }
 
 
@@ -212,8 +213,8 @@ int main() {
 
     // my_flush_cb(NULL, &everywhere, buffer);
 
-    lv_init();
-
+    // lv_init();
+    ui_init();
     static lv_disp_draw_buf_t disp_buf;
 
     static lv_color_t buf_1[BUFFER_SIZE];

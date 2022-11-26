@@ -11,7 +11,7 @@ pico_sdk_init()
 
 # rest of your project
 add_subdirectory(lvgl)
-
+add_subdirectory(eez)
 
 add_executable(
     lvgl_rp2040_sh1107
