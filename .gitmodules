@@ -5,5 +5,5 @@
 	path = lvgl
 	url = https://github.com/lvgl/lvgl
 [submodule "eez"]
-	path = eez
+	path = eez-framework
 	url = https://github.com/eez-open/eez-framework.git
