@@ -9,13 +9,36 @@ project(lvgl_rp2040_sh1107)
 # initialize the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-# rest of your project
+# lvgl
+include_directories(
+    . # for lv_conf.h
+)
 add_subdirectory(lvgl)
-add_subdirectory(eez)
+
+# eez-framework
+include_directories(
+    eez-framework/src
+)
+add_definitions(-DEEZ_FOR_LVGL -DEEZ_PLATFORM_PICO)
+file(GLOB_RECURSE EEZ_FRAMEWORK_SOURCES
+    eez-framework/src/eez/*.cpp
+    eez-framework/src/eez/*.c
+)
+# /eez-framework
+
+# my sources
+file(GLOB MY_SOURCES
+   main.c
+   ui/*.c
+)
+
+set(ALL_SOURCES)
+list(APPEND ALL_SOURCES ${EEZ_FRAMEWORK_SOURCES})
+list(APPEND ALL_SOURCES ${MY_SOURCES})
 
 add_executable(
     lvgl_rp2040_sh1107
-    main.c
+    ${ALL_SOURCES}
 )
 
 target_link_libraries(lvgl_rp2040_sh1107 pico_stdlib hardware_i2c lvgl)
